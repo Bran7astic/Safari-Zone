@@ -32,3 +32,19 @@
   overflow-y: auto;
   scrollbar-width: thin;
 }
+
+.pkmnImage {
+  height: 10em;
+}
+
+.loading {
+  height: 2em;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+}
