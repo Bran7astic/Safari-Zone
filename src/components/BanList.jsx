@@ -1,11 +1,12 @@
 import "../App.css"
 
-export default function BanList({ list }) {
+export default function BanList({ list, removeBan }) {
     
     return (
         <div className="banlist">
+            <h2>Ban List</h2>
             {list.map((item, idx) => (
-                <p key={idx}>{item}</p>
+                <button onClick={() => removeBan(item)} key={idx}>{item}</button>
             ))}
         </div>
     );

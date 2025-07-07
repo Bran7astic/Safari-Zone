@@ -8,8 +8,14 @@ function App() {
 
   const [banlist, setBanlist] = useState([]);
 
-  const addBan = () => {
-    setBanlist((prev) => [...prev, "Hello"])
+  const addBan = (type) => {
+    if (!banlist.includes(type)) {
+      setBanlist((prev) => [...prev, type])
+    }
+  }
+
+  const removeBan = (typeToRemove) => {
+    setBanlist(prev => prev.filter(type => type !== typeToRemove))
   }
 
   console.log(banlist)
@@ -17,9 +23,8 @@ function App() {
   return (
     <>
       <Header/>
-      <BanList list={banlist}/>
+      <BanList list={banlist} removeBan={removeBan}/>
       <SearchCard addBan={addBan}/>
-
     </>
   )
 }

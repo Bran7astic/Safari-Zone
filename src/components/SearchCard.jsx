@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 import PokemonDisplay from "./PokemonDisplay";
 
@@ -28,13 +28,13 @@ export default function SearchCard({ addBan }) {
       const data = await results.json();
       setTimeout(() => {
         setImg(data.sprites.other["official-artwork"].front_default);
+        setLoading(false);
         // Parse data to json
         console.log(data);
 
         // Sets iamge
         const types = data.types.map((item) => item.type.name);
         setAttributes((prev) => [...prev, ...types]);
-        setLoading(false);
       }, 700);
     } catch (error) {
       console.error("Error:", error);
@@ -43,16 +43,18 @@ export default function SearchCard({ addBan }) {
 
   return (
     <div className="search-card">
-
-      
-      <PokemonDisplay loading={loading} image={img}/>
+      <PokemonDisplay loading={loading} image={img} />
 
       <div>
         {attributes &&
-          attributes.map((item, idx) => <button key={idx}>{item}</button>)}
+          attributes.map((item, idx) => 
+            <button key={idx} onClick={() => addBan(item)}>{item}</button>
+        )}
       </div>
 
-      <button onClick={getPokemon}>Discover 🔍</button>
+      <button className="discover" onClick={getPokemon}>
+        Discover 🔍
+      </button>
     </div>
   );
 }
