@@ -57,7 +57,7 @@ GIF created with ...
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Coming up with a way to exclude attributes was tricky!
 
 ## License
 
