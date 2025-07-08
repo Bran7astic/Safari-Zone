@@ -1,6 +1,7 @@
-export default function PokemonDisplay({ loading, image }) {
+export default function PokemonDisplay({ loading, image, fullBan }) {
   
     if (!(loading || image)) return;
+    if (fullBan) return <h4>You've put all the types on your banlist! Please remove some to discover more Pokemon!</h4>
 
     return (
     <div className="imageContainer">

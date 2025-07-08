@@ -1,39 +1,58 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import PokemonDisplay from "./PokemonDisplay";
-
-export default function SearchCard({ addBan }) {
+export default function SearchCard({ banlist, addBan }) {
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState("");
   const [attributes, setAttributes] = useState([]);
+  const [name, setName] = useState("");
 
-  const getRandomDexNum = () => {
-    return Math.floor(Math.random() * 1025) + 1;
+  const fullBan = banlist.length==18
+
+  const getRandomDexNum = (length) => {
+    return Math.floor(Math.random() * length) + 1;
   };
 
   const getPokemon = async () => {
+
     setAttributes([]);
-    const dexNum = getRandomDexNum();
 
     try {
       setLoading(true);
-      const results = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${dexNum}`
-      );
 
-      if (!results.ok) {
-        throw new Error(`HTTP Error, Status: ${results.status}`);
+      let banned = true
+      let data, types
+
+      while (banned) {
+
+        const dexNum = getRandomDexNum(1025);
+
+        const results = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${dexNum}`
+        );
+
+        if (!results.ok) {
+          throw new Error(`HTTP Error, Status: ${results.status}`);
+        }
+
+        data = await results.json();
+        types = data.types.map((item) => item.type.name);
+        
+        const isValid = !types.some(type => banlist.includes(type));
+
+        if (isValid) {
+          banned = false;
+        }
       }
 
-      const data = await results.json();
-      setTimeout(() => {
-        setImg(data.sprites.other["official-artwork"].front_default);
-        setLoading(false);
-        // Parse data to json
-        console.log(data);
+      const pokemonInfo = data;
+      console.log("Types:", types)
+      console.log(pokemonInfo);
 
-        // Sets iamge
-        const types = data.types.map((item) => item.type.name);
+      setTimeout(() => {
+        setImg(pokemonInfo.sprites.other["official-artwork"].front_default);
+        setName(pokemonInfo.name);
+        setLoading(false);
         setAttributes((prev) => [...prev, ...types]);
       }, 700);
     } catch (error) {
@@ -41,15 +60,29 @@ export default function SearchCard({ addBan }) {
     }
   };
 
+  const capitalize = (name) => {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
+
   return (
     <div className="search-card">
-      <PokemonDisplay loading={loading} image={img} />
+      {name && !loading && !fullBan && (
+        <h2>
+          You discover{" "}
+          {"aeiou".includes(name.charAt(0).toLowerCase()) ? "an" : "a"}{" "}
+          {capitalize(name)}!
+        </h2>
+      )}
+
+      <PokemonDisplay loading={loading} image={img} fullBan={fullBan}/>
 
       <div>
-        {attributes &&
-          attributes.map((item, idx) => 
-            <button key={idx} onClick={() => addBan(item)}>{item}</button>
-        )}
+        {attributes && !fullBan &&
+          attributes.map((item, idx) => (
+            <button key={idx} onClick={() => addBan(item)}>
+              {item.toUpperCase()}
+            </button>
+          ))}
       </div>
 
       <button className="discover" onClick={getPokemon}>

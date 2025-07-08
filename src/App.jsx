@@ -23,8 +23,8 @@ function App() {
   return (
     <>
       <Header/>
-      <BanList list={banlist} removeBan={removeBan}/>
-      <SearchCard addBan={addBan}/>
+      <BanList banlist={banlist} removeBan={removeBan}/>
+      <SearchCard banlist={banlist} addBan={addBan}/>
     </>
   )
 }
