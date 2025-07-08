@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../App.css";
 import PokemonDisplay from "./PokemonDisplay";
+import TypeButton from "./TypeButton";
 export default function SearchCard({ banlist, addBan }) {
+
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState("");
   const [attributes, setAttributes] = useState([]);
@@ -68,7 +70,7 @@ export default function SearchCard({ banlist, addBan }) {
     <div className="search-card">
       {name && !loading && !fullBan && (
         <h2>
-          You discover{" "}
+          You discovered{" "}
           {"aeiou".includes(name.charAt(0).toLowerCase()) ? "an" : "a"}{" "}
           {capitalize(name)}!
         </h2>
@@ -76,12 +78,10 @@ export default function SearchCard({ banlist, addBan }) {
 
       <PokemonDisplay loading={loading} image={img} fullBan={fullBan}/>
 
-      <div>
+      <div style={{display: "flex", gap: "1em"}}>
         {attributes && !fullBan &&
           attributes.map((item, idx) => (
-            <button key={idx} onClick={() => addBan(item)}>
-              {item.toUpperCase()}
-            </button>
+            <TypeButton key={idx} type={item} action={addBan}/>
           ))}
       </div>
 
