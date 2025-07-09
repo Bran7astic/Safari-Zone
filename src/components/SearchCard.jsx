@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../App.css";
 import PokemonDisplay from "./PokemonDisplay";
 import TypeButton from "./TypeButton";
-export default function SearchCard({ banlist, addBan }) {
+export default function SearchCard({ banlist, addBan, setSeen }) {
 
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState("");
@@ -52,11 +52,23 @@ export default function SearchCard({ banlist, addBan }) {
       console.log(pokemonInfo);
 
       setTimeout(() => {
-        setImg(pokemonInfo.sprites.other["official-artwork"].front_default);
-        setName(pokemonInfo.name);
+        const sprite = pokemonInfo.sprites.other["official-artwork"].front_default
+        const name = pokemonInfo.name
+        setImg(sprite);
+        setName(name);
         setLoading(false);
         setAttributes((prev) => [...prev, ...types]);
+  
+        const pokemonObj = {
+          sprite: sprite,
+          name: capitalize(name)
+        }
+
+        setSeen(prev => [...prev, pokemonObj])
+
       }, 700);
+
+
     } catch (error) {
       console.error("Error:", error);
     }

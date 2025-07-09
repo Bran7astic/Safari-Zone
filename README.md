@@ -28,28 +28,25 @@ The following **required** functionality is completed:
 - [x] **Attributes on the ban list prevent further images/API results with that attribute from being displayed**
   - Clicking on the API call button should not result in any image/attributes with attribute values in the ban list being displayed (ex. Using a cat API, if the ban list includes the value 'Siberian' for the breed attribute, clicking on the Discover button should never result in a Siberian cat being displayed)
   - Note: More attribute values on the ban list may result in a higher frequency of repeat results
-  -  [ ] _To ensure an accurate grade, your recording **must** show that when clicked, an attribute in the ban list is immediately removed from the list of banned attributes_
+  -  [x] _To ensure an accurate grade, your recording **must** show that when clicked, an attribute in the ban list is immediately removed from the list of banned attributes_
 
 
 The following **optional** features are implemented:
 
 - [x] Multiple types of attributes are clickable and can be added to the ban list
-- [ ] Users can see a stored history of their previously displayed  results from this session
+- [x] Users can see a stored history of their previously displayed  results from this session
   - A dedicated section of the application displays all the previous images/attributes seen before
   - Each time the API call button is clicked, the history updates with the newest API result
 
-The following **additional** features are implemented:
-
-* [ ] List anything else that you added to improve the site's functionality!
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./public/preview.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
+GIF created with ScreenToGif for Windows
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
