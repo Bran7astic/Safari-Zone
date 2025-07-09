@@ -2,7 +2,7 @@
 
 Submitted by: **Brandon Budhan**
 
-This web app: **Discover Pokemon in this expansive Safari Zone! Press Discover to start.
+This web app: **Discover Pokemon in this expansive Safari Zone! Press Discover to start.**
 
 Click a type to add it to the Scratch List! You'll no longer discover Pokemon of that type.**
 
