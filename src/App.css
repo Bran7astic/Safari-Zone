@@ -29,7 +29,7 @@
   top: 0;
   right: 0;
   height: 100vh;
-  width: auto;
+  width: 10vw;
   overflow-y: auto;
   scrollbar-width: thin;
   gap: 1em;
